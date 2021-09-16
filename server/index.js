@@ -1,6 +1,6 @@
 
 const express=require('express');
-const mysql=require('mysql');
+const mysql=require('mysql2');
 const cors=require('cors');
 const bcrypt = require('bcrypt');
 
@@ -36,9 +36,9 @@ app.use(session({
 }))
 
 const db=mysql.createConnection({
-    user:"root",
+    user:"keerthana",
     host:"localhost",
-    password:"",
+    password:"Keerthu@0805",
     database:"shoppingsystem"
 
 })
@@ -143,6 +143,6 @@ app.post('/login',(req,res)=>{
 
  
 
-app.listen(8081,()=>{
+app.listen(8084,()=>{
     console.log("server running")
 })
