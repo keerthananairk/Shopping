@@ -2,8 +2,6 @@ import React from 'react'
 import Product from './Product'
 import './Store.css'
 function Store() {
-   
-
     return (
         <div className="store">
             <div className="store_container">
@@ -12,7 +10,6 @@ function Store() {
                     <Product id="5678" title="Printed Anarkali Kurta" price={1450} image="https://img3.junaroad.com/uiproducts/17562544/pri_175_p-1614011069.jpg"/>
                     <Product id="910" title="Solid Cotton Blend straight Kurta" price={1500} image="https://img3.junaroad.com/uiproducts/17627249/pri_175_p-1616765494.jpg"/>
                     <Product id="1112"title= "Green Cotton Blend Straight Kurta" price={1850} image="https://img3.junaroad.com/uiproducts/17948971/pri_175_p-1629798805.jpg"/>
-
                 </div>
                 <div className="store_row">
                 <Product id="1314" title="'Printed A-line Kurta'" price={2250} image="https://img3.junaroad.com/uiproducts/17595718/pri_175_p-1615639908.jpg"/>

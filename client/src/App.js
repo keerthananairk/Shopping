@@ -6,14 +6,12 @@ import Header from './Header'
 import Store from './Store'
 import Checkout from './Checkout'
 import Payment from './Payment';
-import {loadStripe} from '@stripe/stripe-js'
-import {Elements} from '@stripe/react-stripe-js'
+import Seller from './Seller'
+import Addproduct from './Addproduct'
+
 import {BrowserRouter as Router ,Switch,Route} from 'react-router-dom';
 
 
-const promise=loadStripe(
-  "pk_test_51JYUMGSAtdoocnYsFowptmmJAJOVmDUAeTaoLMHgFxos5WPNJxxIhbsDyqXoldYAcIsJq1NTkESA6UoWJ1AV184B00Hb6Wusv7"
-)
 
 function App() {
   return (
@@ -36,10 +34,17 @@ function App() {
           <Login/>
           </Route>
           <Route path="/payment">
-         <Elements stripe={promise}>   
+         
         <Payment/>
-        </Elements>
+         
         </Route>
+        <Route path="/addproduct">
+          <Addproduct/>
+             </Route>
+        <Route path="/sellerpage">
+         <Seller/>          
+        </Route>
+        
       </Switch>
         
       
