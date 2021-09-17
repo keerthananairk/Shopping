@@ -70,11 +70,15 @@ app.post("/sellerpage", (req, res) => {
 
 
 app.get('/product', (req, res) => {
-    
+    const id = req.body.id
+    const title = req.body.title
+    const price = req.body.price
+    const image = req.body.image
+
     db.query("SELECT * FROM addproduct", (err, result, fields) => {
         if (err) {
-             console.log(err);
-        } res.json({title:{title},price:{price},image:{image}})
+            console.log(err);
+        } res.json(result)
     })
 })
 
@@ -164,6 +168,6 @@ app.post('/login', (req, res) => {
 
 
 
-app.listen(5004, () => {
+app.listen(5005, () => {
     console.log("server running")
 })
