@@ -1,167 +1,169 @@
 
-const express=require('express');
-const mysql=require('mysql2');
-const cors=require('cors');
+const express = require('express');
+const mysql = require('mysql2');
+const cors = require('cors');
 const bcrypt = require('bcrypt');
 
-const bodyParser =require('body-parser');
-const cookieParser=require('cookie-parser');
-const session=require('express-session');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 
 const { response } = require('express');
-const saltRound=10
+const saltRound = 10
 
-const jwt=require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 
-const app=express()
+const app = express()
 app.use(express.json());
 app.use(cors({
-    origin:("http://localhost:3000"),
-    methods:["GET","POST"],
-    credentials:true
+    origin: ("http://localhost:3000"),
+    methods: ["GET", "POST"],
+    credentials: true
 }));
 app.use(cookieParser())
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
-    key:"userId",
-    secret:"welcome",
-    resave:false,
-    saveUninitialized:false,
-    cookie:{
-        expires:60 * 60 * 24,
+    key: "userId",
+    secret: "welcome",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60 * 60 * 24,
     }
 }))
 
-const db=mysql.createConnection({
-    user:"keerthana",
-    host:"localhost",
-    password:"Keerthu@0805",
-    database:"shoppingsystem"
+const db = mysql.createConnection({
+    user: "keerthana",
+    host: "localhost",
+    password: "Keerthu@0805",
+    database: "shoppingsystem"
 
 })
 
-    
-app.post("/list",(req,res)=>{
 
-    const title= req.body.title
-    const price=req.body.price
-    const image=req.body.image
+app.post("/list", (req, res) => {
 
-
-        db.query("INSERT INTO productlist(title,price,image)VALUES(?,?,?)",[title,price,image],(err,result)=>{
-            console.log(err)
-        })
-    })
+    const title = req.body.title
+    const price = req.body.price
+    const image = req.body.image
 
 
-app.post("/sellerpage",(req,res)=>{
-    const id=req.body.id
-    const title=req.body.title
-    const price=req.body.price
-    const image=req.body.image
-      
-    db.query("INSERT INTO addproduct(id,title,price,image)VALUES(?,?,?,?)",[id,title,price,image],(err,result)=>{
+    db.query("INSERT INTO productlist(title,price,image)VALUES(?,?,?)", [title, price, image], (err, result) => {
         console.log(err)
     })
 })
 
 
-app.get('/product',(req,res)=>{
-    db.query("SELECT * FROM addproduct",(err,result,fields)=>{
-        if(err){
-            return console.log(err);
-        } res.send=("hello")
-    })   
+app.post("/sellerpage", (req, res) => {
+    const id = req.body.id
+    const title = req.body.title
+    const price = req.body.price
+    const image = req.body.image
+
+    db.query("INSERT INTO addproduct(id,title,price,image)VALUES(?,?,?,?)", [id, title, price, image], (err, result) => {
+        console.log(err)
+    })
 })
-app.get("/test",(req, res) =>{
-        return console.log("hello")
-
-res.send('Hello World!'))}
 
 
+app.get('/product', (req, res) => {
+    
+    db.query("SELECT * FROM addproduct", (err, result, fields) => {
+        if (err) {
+             console.log(err);
+        } res.json({title:{title},price:{price},image:{image}})
+    })
+})
 
-app.post("/register",(req,res)=>{
+app.get("/test", (req, res) => {
+    console.log("hello")
+    res.json({ username: 'Flavio' })
+})
 
-    const username= req.body.username
-    const password=req.body.password
 
-    bcrypt.hash(password,saltRound,(err,hash)=>{
-        if(err){
+
+app.post("/register", (req, res) => {
+
+    const username = req.body.username
+    const password = req.body.password
+
+    bcrypt.hash(password, saltRound, (err, hash) => {
+        if (err) {
             console.log(err)
         }
-        db.query("INSERT INTO register(username,password)VALUES(?,?)",[username,hash],(err,result)=>{
+        db.query("INSERT INTO register(username,password)VALUES(?,?)", [username, hash], (err, result) => {
             console.log(err)
         })
     })
 
-    })
-    const verifyJWT=(req,res,next)=>{
-        const token=req.headers["x-access-token"]
-        if(!token){
-            res.send("need token")
-        } else{
-            jwt.verify(token,"jwtSecret",(err,decoded)=>{
-                if(err){
-                    res.json({auth:false, message:"authentication failed"})
-                }else{
-                    req.userUsername=decoded.Username;
-                    next();
-                }
-            })
-        }
+})
+const verifyJWT = (req, res, next) => {
+    const token = req.headers["x-access-token"]
+    if (!token) {
+        res.send("need token")
+    } else {
+        jwt.verify(token, "jwtSecret", (err, decoded) => {
+            if (err) {
+                res.json({ auth: false, message: "authentication failed" })
+            } else {
+                req.userUsername = decoded.Username;
+                next();
+            }
+        })
     }
+}
 
-    app.get('/isUserAuth', verifyJWT ,(req,res)=>{
-     res.send('Authenticated')
-    })
+app.get('/isUserAuth', verifyJWT, (req, res) => {
+    res.send('Authenticated')
+})
 
-    app.get("/login",(req,res)=>{
-        if(req.session.user){
-            res.send({loggedIn: true, user:req.session.user})
-        }else{
-            res.send({loggedIn:false})
-        }
-    })
-  
+app.get("/login", (req, res) => {
+    if (req.session.user) {
+        res.send({ loggedIn: true, user: req.session.user })
+    } else {
+        res.send({ loggedIn: false })
+    }
+})
 
-app.post('/login',(req,res)=>{
+
+app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-        
-        db.query("SELECT * FROM register WHERE username=?",username,(err,result)=>{
-            if (err){
-                res.send({err:err})
-            }
-            if(result.length>0){
-                bcrypt.compare(password,result[0].password,(err,response)=>{
-               if(response){      
-                   const username=result[0].username
-                   const token=jwt.sign({username},"jwtSecret",{
-                       expiresIn:300,
-                   })
-                   req.session.user=result;
+
+    db.query("SELECT * FROM register WHERE username=?", username, (err, result) => {
+        if (err) {
+            res.send({ err: err })
+        }
+        if (result.length > 0) {
+            bcrypt.compare(password, result[0].password, (err, response) => {
+                if (response) {
+                    const username = result[0].username
+                    const token = jwt.sign({ username }, "jwtSecret", {
+                        expiresIn: 300,
+                    })
+                    req.session.user = result;
 
 
-                   res.json({auth:true,token:token, result:result})
-               }else{
-                res.json({auth:false, message:"wrong username password combination"})
-               }
-                })
-            }else{
-                res.json({auth:false, message:"no user exist"})
-            }
-        });
-    
-    
-    });   
+                    res.json({ auth: true, token: token, result: result })
+                } else {
+                    res.json({ auth: false, message: "wrong username password combination" })
+                }
+            })
+        } else {
+            res.json({ auth: false, message: "no user exist" })
+        }
+    });
 
 
- 
+});
 
-app.listen(5003,()=>{
+
+
+
+app.listen(5004, () => {
     console.log("server running")
 })
