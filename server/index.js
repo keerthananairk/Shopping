@@ -55,14 +55,34 @@ app.post("/list",(req,res)=>{
             console.log(err)
         })
     })
-app.get("/product",(req,res)=>{
+
+
+app.post("/sellerpage",(req,res)=>{
+    const id=req.body.id
     const title=req.body.title
-    const price=req.body.title
-    const image=req.body.title
-    db.query("SELECT * FROM productlist",[title,price,image],(err,result)=>{
+    const price=req.body.price
+    const image=req.body.image
+      
+    db.query("INSERT INTO addproduct(id,title,price,image)VALUES(?,?,?,?)",[id,title,price,image],(err,result)=>{
         console.log(err)
     })
 })
+
+
+
+
+app.get('/product',(req,res)=>{
+    db.query("SELECT * FROM addproduct",(err,result,fields)=>{
+        if(err){
+            return console.log(err);
+        } return console.log(result)
+    })
+})
+
+
+
+
+
 
 app.post("/register",(req,res)=>{
 
@@ -143,6 +163,6 @@ app.post('/login',(req,res)=>{
 
  
 
-app.listen(8084,()=>{
+app.listen(4008,()=>{
     console.log("server running")
 })
