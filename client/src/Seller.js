@@ -10,7 +10,7 @@ function Seller() {
     const[image,setImage]=useState('');
 
     const add =()=>{
-        Axios.post("http://localhost:4008/sellerpage", {id:id ,title:title, price:price, image:image,
+        Axios.post("http://localhost:5002/sellerpage", {id:id ,title:title, price:price, image:image,
     }).then((response)=>{
         console.log(response)
     })
@@ -42,8 +42,7 @@ function Seller() {
              <Button onClick={()=>{
                  add();
              
-             }}
-                >Add</Button>
+                 }}>Add</Button>
            </Form>
          </div>
         

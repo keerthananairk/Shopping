@@ -69,18 +69,17 @@ app.post("/sellerpage",(req,res)=>{
 })
 
 
-
-
 app.get('/product',(req,res)=>{
     db.query("SELECT * FROM addproduct",(err,result,fields)=>{
         if(err){
             return console.log(err);
-        } return console.log(result)
-    })
+        } res.send=("hello")
+    })   
 })
+app.get("/test",(req, res) =>{
+        return console.log("hello")
 
-
-
+res.send('Hello World!'))}
 
 
 
@@ -163,6 +162,6 @@ app.post('/login',(req,res)=>{
 
  
 
-app.listen(4008,()=>{
+app.listen(5003,()=>{
     console.log("server running")
 })

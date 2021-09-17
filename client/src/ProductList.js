@@ -8,7 +8,7 @@ class Display extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:4008/product")
+    fetch("http://localhost:5002/product")
       .then(response => {
         response.json();
       })

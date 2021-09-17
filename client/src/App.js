@@ -8,7 +8,7 @@ import Checkout from './Checkout'
 import Payment from './Payment';
 import Seller from './Seller'
 import Addproduct from './Addproduct'
-
+import Display from './ProductList';
 import {BrowserRouter as Router ,Switch,Route} from 'react-router-dom';
 
 
@@ -43,6 +43,9 @@ function App() {
              </Route>
         <Route path="/sellerpage">
          <Seller/>          
+        </Route>
+        <Route path="/product">
+          <Display/>
         </Route>
         
       </Switch>
