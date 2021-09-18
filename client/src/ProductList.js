@@ -1,41 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-class Display extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { product: [] };
-  }
-
-  componentDidMount() {
-    fetch("http://localhost:5004/product")
-      .then(response => {
-        response.json();
-      })
-      .then(product => {
-        this.setState({ product });
-      })
-      .then(err => {
-        console.log(err);
-      });
-  }
-
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.state.product.map(product => (
-            <p>
-                <li>{product.id}</li>
-              <li>{product.title}</li>
-              <li>{product.price}</li>
-              <li>{product.image}</li>
-            </p>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+const Data = () => {
+  const [item, setItem] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5005/product")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setItem(result);
+        }
+      )
+  }, [])
+  return (
+    <div>
+    {item.map((item)=>(
+      <p>
+      {item.title}
+      {item.price}
+      </p>
+    ))}
+      
+    </div>
+  )
 }
 
-export default Display;
+export default Data;
