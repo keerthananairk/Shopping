@@ -10,7 +10,7 @@ function Seller() {
     const[image,setImage]=useState('');
 
     const add =()=>{
-        Axios.post("http://localhost:5005/sellerpage", {id:id ,title:title, price:price, image:image,
+        Axios.post("http://localhost:5000/sellerpage", {id:id ,title:title, price:price, image:image,
     }).then((response)=>{
         console.log(response)
     })
