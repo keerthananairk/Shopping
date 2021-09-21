@@ -7,8 +7,8 @@
     "node": "10.19.0"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "build": "cd client && npm install && npm run build"
+    "start":"node server/index.js",
+    "build":"cd client && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",

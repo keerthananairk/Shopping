@@ -1,6 +1,6 @@
 
 import './App.css';
-import Home from "./Home"
+import Home from "./"
 import Login from './Login'
 import Header from './Header'
 import Store from './Store'
@@ -19,7 +19,7 @@ function App() {
       <Header/>
       
       <Switch>
-        <Route path="/home">
+        <Route path="/">
     
           <Home/>
         </Route>
