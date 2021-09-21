@@ -19,7 +19,7 @@ const jwt = require('jsonwebtoken')
 
 const app = express()
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+
 app.use(cors({
     origin: ("http://localhost:3000"),
     methods: ["GET", "POST"],
@@ -87,8 +87,7 @@ app.get('/product', (req, res) => {
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-  });
-
+  })
 
 
 
