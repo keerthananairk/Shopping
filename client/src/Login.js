@@ -60,7 +60,7 @@ function SigninForm(){
 
     Axios.defaults.withCredentials=true
     const login=()=>{
-        Axios.post('http://localhost:3001/login', {username:username, password:password,
+        Axios.post('http://localhost:5000/login', {username:username, password:password,
     }).then((response)=>{
         if(!response.data.auth){
             setLoginStatus(false)
@@ -72,7 +72,7 @@ function SigninForm(){
     }
 
     useEffect(()=>{
-      Axios.get("http://localhost:3001/login").then((response)=>{
+      Axios.get("http://localhost:5000/login").then((response)=>{
           if(response.data.loggedIn === true){
             <h1>Succesfully logged</h1>
           }
@@ -102,7 +102,7 @@ function SignupForm(){
     
 
     const register=()=>{
-        Axios.post('http://localhost:3001/register', {username:usernameReg, password:passwordReg,
+        Axios.post('http://localhost:5000/register', {username:usernameReg, password:passwordReg,
     }).then((response)=>{
         console.log(response)
     })

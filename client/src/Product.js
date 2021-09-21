@@ -21,7 +21,7 @@ function Product({id,title,image,price}) {
     
 
     const list =()=>{
-        Axios.post("http://localhost:3001/list", {id:id, title:title, price:price, image:image,
+        Axios.post("http://localhost:5000/list", {id:id, title:title, price:price, image:image,
     }).then((response)=>{
         console.log(response)
     })
