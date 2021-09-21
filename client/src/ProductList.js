@@ -4,7 +4,8 @@ const Data = () => {
   const [item, setItem] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/product")
-      .then(res => res.json())
+      //.then(res =>(console.log(res))
+      
       .then(
         (result) => {
           setItem(result);

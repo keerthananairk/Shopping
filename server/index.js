@@ -1,5 +1,7 @@
 
 const express = require('express');
+const path = require('path');
+
 const mysql = require('mysql2');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
@@ -17,6 +19,7 @@ const jwt = require('jsonwebtoken')
 
 const app = express()
 app.use(express.json());
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(cors({
     origin: ("http://localhost:3000"),
     methods: ["GET", "POST"],
@@ -81,6 +84,13 @@ app.get('/product', (req, res) => {
         } res.json(result)
     })
 })
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+  });
+
+
+
 
 app.get("/test", (req, res) => {
     console.log("hello")
