@@ -1,6 +1,6 @@
 
 const express = require('express');
-const path = require('path');
+
 
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -85,16 +85,14 @@ app.get('/product', (req, res) => {
     })
 })
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-  })
 
 
 
-app.get("/test", (req, res) => {
-    console.log("hello")
-    res.json({ username: 'Flavio' })
-})
+
+//app.get("/test", (req, res) => {
+    //console.log("hello")
+   // res.json({ username: 'Flavio' })
+//})
 
 
 
