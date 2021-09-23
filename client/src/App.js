@@ -7,7 +7,7 @@ import Store from './Store'
 import Checkout from './Checkout'
 import Payment from './Payment';
 import Seller from './Seller'
-import Addproduct from './Addproduct'
+import Admin from './Admin'
 import Data from './ProductList';
 import {BrowserRouter as Router ,Switch,Route} from 'react-router-dom';
 
@@ -37,8 +37,8 @@ function App() {
         <Payment/>
          
         </Route>
-        <Route path="/addproduct">
-          <Addproduct/>
+        <Route path="/admin">
+          <Admin/>
              </Route>
         <Route path="/sellerpage">
          <Seller/>          

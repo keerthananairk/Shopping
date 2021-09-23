@@ -1,6 +1,6 @@
 
 const express = require('express');
-
+const path = require('path');
 
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -87,11 +87,9 @@ app.get('/product', (req, res) => {
 
 
 
-
-
 //app.get("/test", (req, res) => {
-    //console.log("hello")
-   // res.json({ username: 'Flavio' })
+//console.log("hello")
+// res.json({ username: 'Flavio' })
 //})
 
 
@@ -144,7 +142,7 @@ app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-
+    
     db.query("SELECT * FROM register WHERE username=?", username, (err, result) => {
         if (err) {
             res.send({ err: err })
@@ -171,7 +169,19 @@ app.post('/login', (req, res) => {
 
 
 });
+app.post('/admin', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    db.query("SELECT * FROM admin WHERE username=? AND password=?", [username,password], (err, result) => {
+       if(err){ console.log(err)
+        }else{
+            if(result){
 
+            }
+        }
+        }
+    )
+})
 
 
 
