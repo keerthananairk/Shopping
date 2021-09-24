@@ -1,6 +1,6 @@
 
 const express = require('express');
-const path = require('path');
+
 
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -87,10 +87,7 @@ app.get('/product', (req, res) => {
 
 
 
-//app.get("/test", (req, res) => {
-//console.log("hello")
-// res.json({ username: 'Flavio' })
-//})
+
 
 
 
@@ -109,25 +106,30 @@ app.post("/register", (req, res) => {
     })
 
 })
-const verifyJWT = (req, res, next) => {
-    const token = req.headers["x-access-token"]
-    if (!token) {
-        res.send("need token")
-    } else {
-        jwt.verify(token, "jwtSecret", (err, decoded) => {
-            if (err) {
-                res.json({ auth: false, message: "authentication failed" })
-            } else {
-                req.userUsername = decoded.Username;
+const verifyJWT=(req,res,next)=>{
+    const token=req.headers("x-access-token")
+
+    if(!token){
+        res.send('need token')
+    }else{
+        jwt.verify(token,"jwtSecret",(err,decoded)=>{
+            if(err){
+                res.json({auth:false, message:"failed to authenticate"})
+            }else{
+                req.userUsername=decoded.username;
                 next();
             }
-        })
+        });
     }
-}
+};
 
-app.get('/isUserAuth', verifyJWT, (req, res) => {
-    res.send('Authenticated')
+
+app.get('/isUserAuth',verifyJWT,(req,res)=>{
+    res.send("authenticated")
 })
+
+
+
 
 app.get("/login", (req, res) => {
     if (req.session.user) {
@@ -142,7 +144,6 @@ app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    
     db.query("SELECT * FROM register WHERE username=?", username, (err, result) => {
         if (err) {
             res.send({ err: err })
@@ -150,36 +151,38 @@ app.post('/login', (req, res) => {
         if (result.length > 0) {
             bcrypt.compare(password, result[0].password, (err, response) => {
                 if (response) {
-                    const username = result[0].username
-                    const token = jwt.sign({ username }, "jwtSecret", {
-                        expiresIn: 300,
+                    const username=result[0].username
+                    const token=jwt.sign({username},"jwtSecret",{
+                        expiresIn:300,
                     })
                     req.session.user = result;
 
-
-                    res.json({ auth: true, token: token, result: result })
+                  res.json({auth: true, token:token, result:result})  
+                    
                 } else {
-                    res.json({ auth: false, message: "wrong username password combination" })
+                    res.json({ auth:false, message: "wrong username password combination" })
                 }
             })
         } else {
-            res.json({ auth: false, message: "no user exist" })
+            res.json({ auth:false, message: "no user exist" })
         }
     });
 
 
 });
+
 app.post('/admin', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    db.query("SELECT * FROM admin WHERE username=? AND password=?", [username,password], (err, result) => {
-       if(err){ console.log(err)
-        }else{
-            if(result){
+    db.query("SELECT * FROM admin WHERE username=? AND password=?", [username, password], (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            if (result) {
 
             }
         }
-        }
+    }
     )
 })
 

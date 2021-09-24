@@ -1,5 +1,6 @@
 import React from 'react'
 import './Admin.css'
+import { Link } from 'react-router-dom'
 import { Button, Form, Label, Input, FormGroup } from 'reactstrap'
 function Admin() {
     return (
@@ -13,7 +14,7 @@ function Admin() {
                     <Label>Password</Label>
                     <Input type="text"/>
                 </FormGroup>
-                <Button>Submit</Button>
+               <Link to="/sellerpage"> <Button>Submit</Button></Link>
             </Form>
         </div>
     )

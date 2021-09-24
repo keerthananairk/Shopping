@@ -87,7 +87,6 @@ function SigninForm(){
     <label for="password">Password</label>
     <input type="password" onChange={(e)=>{setPassword(e.target.value);}}/>
     <Button onClick={login}>Login</Button>
-    
     {loginStatus &&(
         <Link to="/payment"><Button>Continue to checkout</Button></Link>
     )}
