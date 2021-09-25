@@ -11,7 +11,7 @@ function Seller() {
 
 
     const add = () => {
-        Axios.post("http://localhost:5000/sellerpage", {
+        Axios.post("http://13.250.111.175:5000/sellerpage", {
             id: id, title: title, price: price, image: image,
         }).then((response) => {
             console.log(response)
