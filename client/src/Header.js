@@ -31,7 +31,7 @@ function Header() {
                 
             </div>
             <div>
-              <a href="/admin"><span className="Admin">Admin</span></a>
+              <a href="/admin"><span className="admin">Admin</span></a>
             </div>
             
             <Link to="/checkout"><button className="header_optionbasket">
