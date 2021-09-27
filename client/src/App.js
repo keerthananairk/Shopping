@@ -1,17 +1,18 @@
 
-import './App.css';
+
 import Login from './Login'
-import Header from './Header'
+import Checkout from './CheckoutPage'
 import Store from './Store'
-import Checkout from './Checkout'
+
 import Payment from './Payment';
 import Seller from './Seller'
 import Admin from './Admin'
-import Data from './ProductList';
 
+import Navbar from './Navbar'
 import { Button } from 'reactstrap';
 import { BrowserRouter as Router, Switch,Link,Route } from 'react-router-dom';
-import React from 'react';
+import React from 'react'
+
 
 const Home=()=>(
 <div style={{ backgroundImage: 'url("https://img.freepik.com/free-photo/happy-beautiful-young-woman-blue-dress-with-his-hand-holding-shopping-bags-finger-pointing-light-blue-with-copy-space_74952-576.jpg?size=626&ext=jpg")', height: "700px", backgroundSize: "cover", backgroundPosition: 'center', backgroundRepeat: "no-repeat" }}>
@@ -29,12 +30,18 @@ const Home=()=>(
     </div>
 )
 
+
+
 class App extends React.Component{
+
+  
+
   render(){
     return(
       
       <Router>
-        <Header/>
+        <Navbar/>
+       
         <Switch>
           <Route path="/store" component={Store}/>
           <Route path="/login" component={Login}/>
@@ -42,7 +49,7 @@ class App extends React.Component{
           <Route path="/payment" component={Payment}/>
           <Route path="/sellerpage" component={Seller}/>
           <Route path="/admin" component={Admin}/>
-          <Route path="/productlist" component={Data}/>
+          
         
         <Route path="/" component={Home}/>
         
