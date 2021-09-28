@@ -4,7 +4,7 @@ const Store = () => {
     
     const[products,setProducts]=useState([]);
     useEffect(() => {
-      fetch("http://13.250.111.175:5000/product")
+      fetch("http://54.251.93.15:5000/product")
       .then(res => res.json())
       .then(
         (result) => {

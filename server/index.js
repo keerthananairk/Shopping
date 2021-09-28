@@ -21,7 +21,7 @@ const app = express()
 app.use(express.json());
 
 app.use(cors({
-    origin: ("http://13.250.111.175:3000"),
+    origin: ("http://54.251.93.15:3000"),
     methods: ["GET", "POST"],
     credentials: true
 }));

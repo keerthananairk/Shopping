@@ -4,7 +4,7 @@ import {ShoppingCart} from "@material-ui/icons"
 import { Link } from 'react-router-dom'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-import useStyles from './components/Navbar/style'
+import useStyles from './Navbarstyle'
 import { useStateValue } from './StateProvider'
 
 const Navbar = () => {

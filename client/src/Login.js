@@ -60,7 +60,7 @@ function SigninForm(){
 
     Axios.defaults.withCredentials=true
     const login=()=>{
-        Axios.post('http://13.250.111.175:5000/login', {username:username, password:password,
+        Axios.post('http://54.251.93.15:5000/login', {username:username, password:password,
     }).then((response)=>{
         if(!response.data.auth){
             setLoginStatus(false)
@@ -72,7 +72,7 @@ function SigninForm(){
     }
 
     useEffect(()=>{
-      Axios.get("http://13.250.111.175:5000/login").then((response)=>{
+      Axios.get("http://54.251.93.15:5000/login").then((response)=>{
           if(response.data.loggedIn === true){
             <h1>Succesfully logged</h1>
           }
@@ -101,7 +101,7 @@ function SignupForm(){
     
 
     const register=()=>{
-        Axios.post('http://13.250.111.175:5000/register', {username:usernameReg, password:passwordReg,
+        Axios.post('http://54.251.93.15:5000/register', {username:usernameReg, password:passwordReg,
     }).then((response)=>{
         console.log(response)
     })
